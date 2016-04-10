@@ -5,14 +5,6 @@ var elixir = require('laravel-elixir');
 
 require('laravel-elixir-vueify');
 
-// elixir.config.js.browserify.watchify = {
-//     enabled: true,
-//     options: {
-//         poll: true
-//     }
-// }
-// elixir.config.registerWatcher("default", "dev/**");
-
 elixir.config.js.browserify.watchify.options.poll = true;
 
 gulp.task('sass', function() {
@@ -20,12 +12,6 @@ gulp.task('sass', function() {
 		.pipe(sass()) // Converts Sass to CSS with gulp-sass
 		.pipe(gulp.dest('src/css'))
 });
-
-// gulp.task('js', function() {
-// 	return gulp.src('dev/js/app.js')
-// 		.pipe(browserify())
-// 		.pipe(gulp.dest('src/js'))
-// });
 
 elixir(function(mix) {
     mix.browserify('./dev/js/app.js', './src/js/app.js', './dev');
