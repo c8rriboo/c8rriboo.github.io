@@ -3,8 +3,9 @@
 		<ul>
 			<li v-for="(page_id, page) in menu"
 				@click="setActivePage(page_id)"
+				:class="{active: page_id == active_page}"
 			>
-				{{ page }}
+				<span>{{ page }}</span>
 			</li>
 		</ul>
 	</div>
@@ -24,24 +25,18 @@
 	        }
 	    },
 
-	    computed: {
-	        _current_link_coords: function() {
-	            
-	        }
-	    },
-
-	    events: {
-	        'page_change': function(page_id) {
-	            
-	        }
-	    },
-
 	    methods: {
 	        setActivePage: function(page_id) {
-	            console.log(page_id);
+	            this.$parent.active_page = page_id;
 	        },
 
 	        
+	    },
+
+	    computed: {
+	    	active_page: function() {
+	    		return this.$parent.active_page
+	    	},
 	    },
 
 	    created: function() {

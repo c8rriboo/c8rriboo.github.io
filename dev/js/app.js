@@ -1,5 +1,6 @@
 var Vue = require('vue');
 var Menu = require('./components/menu.vue')
+var Bugify = require('./components/bugify.vue')
 
 Vue.config.debug = true;
 
@@ -8,6 +9,7 @@ new Vue ({
 
     components: {
     	menu: Menu,
+    	bugify: Bugify,
 	},
 
 	data: {

@@ -1,14 +1,40 @@
+@import 'reset';
+@import 'variables';
+
 html{
-	background-color: #3a3a3a;
+	background-color: $black;
 }
 
-h1{
-	font-family: calibri;
-	color: #fafafa;
+body {
+	font-family: arial, sans-serif;
+	color: $white;
 }
 
 #c8rriboo {
 	width: 100%;
 	max-width: 980px;
 	margin: 0px auto;
+
+	#bugify {
+		font-family: monospace;
+		font-size: 22px;
+	}
+
+	#menu {
+		ul {
+			li {
+				display: inline-block;
+				padding: 15px;
+				cursor: pointer;
+
+				&.active {
+					span {
+						display: inline-block;
+						padding-bottom: 5px;
+						border-bottom: 1px solid $white;
+					}
+				}
+			}
+		}
+	}
 }

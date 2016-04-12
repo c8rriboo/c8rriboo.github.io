@@ -3,6 +3,7 @@
 
 var Vue = require('vue');
 var Menu = require('./components/menu.vue');
+var Bugify = require('./components/bugify.vue');
 
 Vue.config.debug = true;
 
@@ -10,7 +11,8 @@ new Vue({
 	el: '#c8rriboo',
 
 	components: {
-		menu: Menu
+		menu: Menu,
+		bugify: Bugify
 	},
 
 	data: {
@@ -22,7 +24,120 @@ new Vue({
 	}
 });
 
-},{"./components/menu.vue":2,"vue":5}],2:[function(require,module,exports){
+},{"./components/bugify.vue":2,"./components/menu.vue":3,"vue":6}],2:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+
+	props: ['string', 'loop'],
+
+	data: function data() {
+		return {
+			title: false,
+
+			characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#|@!&?;/\\-_<>#|@!&?;/\\-_<>#|@!&?;/\\-_<>#|@!&?;/\\-_<>',
+
+			start_debug: 2000,
+			false_debug_during: 2000,
+			false_debug_each: 50,
+
+			should_loop: false,
+			loop_interval: 30000
+		};
+	},
+
+	methods: {
+		init: function init() {
+			var vm = this;
+
+			setTimeout(function () {
+				vm.fakeDebug(0);
+			}, vm.start_debug);
+		},
+
+		fakeDebug: function fakeDebug(index) {
+			var vm = this;
+
+			vm.changeLetter();
+
+			setTimeout(function () {
+				index++;
+				if (index * vm.false_debug_each <= vm.false_debug_during) {
+					vm.fakeDebug(index);
+				} else {
+					vm.debug(0);
+				}
+			}, vm.false_debug_each);
+		},
+
+		debug: function debug(index) {
+			var vm = this;
+
+			this.title = vm.replaceAt(index, vm.string[index]);
+
+			setTimeout(function () {
+				index++;
+				if (index < vm.title.length) {
+					vm.debug(index);
+				}
+			}, vm.false_debug_each);
+		},
+
+		changeLetter: function changeLetter() {
+			var random_index = this.getRandomStringIndex(this.title),
+			    letter = this.title[random_index];
+
+			this.title = this.replaceAt(random_index, this.getRandomChar());
+		},
+
+		getRandomStringIndex: function getRandomStringIndex(string) {
+			return Math.floor(Math.random() * string.length);
+		},
+
+		getRandomChar: function getRandomChar() {
+			return this.characters[this.getRandomStringIndex(this.characters)];
+		},
+
+		replaceAt: function replaceAt(index, character) {
+			return this.title.substr(0, index) + character + this.title.substr(index + character.length);
+		}
+	},
+
+	created: function created() {
+		this.title = this.string;
+		this.should_loop = this.loop === 'true';
+
+		var random_string = '';
+
+		for (var i = this.title.length - 1; i >= 0; i--) {
+			random_string += this.getRandomChar();
+		};
+
+		this.title = random_string;
+	},
+
+	ready: function ready() {
+		this.init();
+
+		if (this.should_loop) {
+			setInterval(this.init, this.loop_interval);
+		}
+	}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"bugify\">\n\t{{ title }}\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "c:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\bugify.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":6,"vue-hot-reload-api":5}],3:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -38,19 +153,17 @@ module.exports = {
         };
     },
 
-    computed: {
-        _current_link_coords: function _current_link_coords() {}
-    },
-
-    events: {
-        'page_change': function page_change(page_id) {}
-    },
-
     methods: {
         setActivePage: function setActivePage(page_id) {
-            console.log(page_id);
+            this.$parent.active_page = page_id;
         }
 
+    },
+
+    computed: {
+        active_page: function active_page() {
+            return this.$parent.active_page;
+        }
     },
 
     created: function created() {},
@@ -58,19 +171,19 @@ module.exports = {
     ready: function ready() {}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"menu\">\n\t<ul>\n\t\t<li v-for=\"(page_id, page) in menu\" @click=\"setActivePage(page_id)\">\n\t\t\t{{ page }}\n\t\t</li>\n\t</ul>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"menu\">\n\t<ul>\n\t\t<li v-for=\"(page_id, page) in menu\" @click=\"setActivePage(page_id)\" :class=\"{active: page_id == active_page}\">\n\t\t\t<span>{{ page }}</span>\n\t\t</li>\n\t</ul>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\menu.vue"
+  var id = "c:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\menu.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":5,"vue-hot-reload-api":4}],3:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":5}],4:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -163,7 +276,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var Vue // late bind
 var map = Object.create(null)
 var shimmed = false
@@ -463,7 +576,7 @@ function format (id) {
   return id.match(/[^\/]+\.vue$/)[0]
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v1.0.21
@@ -10389,6 +10502,6 @@ setTimeout(function () {
 
 module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":3}]},{},[1]);
+},{"_process":4}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
