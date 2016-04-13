@@ -20,7 +20,7 @@ new Vue({
 	},
 
 	ready: function ready() {
-		// alert('ready!');
+		alert('ready!');
 	}
 });
 
