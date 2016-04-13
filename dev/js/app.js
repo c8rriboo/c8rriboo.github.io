@@ -17,6 +17,6 @@ new Vue ({
 	},
 
 	ready: function() {
-		alert('ready!');
+		// alert('ready!');
 	},
 })
