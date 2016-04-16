@@ -3,9 +3,13 @@
 <html>
 	<body>
 		<div id="c8rriboo">
-			<bugify string="c8rriboo" loop="true"></bugify>
+			<header>
+				<bugify string="c8rriboo" loop="true" autoplay="true"></bugify>
+			</header>
 
-			<menu></menu>			
+			<menu></menu>
+
+			<component :is="active_page"></component>
 
 		</div>
 

@@ -2,7 +2,7 @@
 	<div id="menu">
 		<ul>
 			<li v-for="(page_id, page) in menu"
-				@click="setActivePage(page_id)"
+				@click="setActivePage($event, page_id)"
 				:class="{active: page_id == active_page}"
 			>
 				<span>{{ page }}</span>
@@ -17,20 +17,17 @@
 	    data: function() {
 	        return {
 				menu: {
-					home: 'Home',
-					profile: 'Me, myself & I',
-					contact: 'Contact',
+					'home-page': 'Home',
+					'profile-page': 'Me, myself & I',
 				},
 	            
 	        }
 	    },
 
 	    methods: {
-	        setActivePage: function(page_id) {
+	        setActivePage: function(event, page_id) {
 	            this.$parent.active_page = page_id;
 	        },
-
-	        
 	    },
 
 	    computed: {

@@ -1,13 +1,15 @@
 <template>
-	<div id="bugify">
+	<span id="bugify" @click="fakeDebug(0)">
 		{{ title }}
-	</div>
+	</span>
 </template>
 
 <script>
 	module.exports = {
 
-		props: ['string', 'loop'],
+		name: 'bugify',
+
+		props: ['string', 'loop', 'autoplay'],
 
 	    data: function() {
 	        return {
@@ -25,7 +27,7 @@
 	    },
 
 	    methods: {
-	    	init: function() {
+	    	init: function(wait = false) {
 	    		var vm = this;
 
 	    		setTimeout(function(){
@@ -84,23 +86,28 @@
 
 	    created: function() {
 	    	this.title = this.string;
-	    	this.should_loop = (this.loop === 'true');
+	    	this._loop = (this.loop === 'true');
+	    	this._autoplay = (this.autoplay === 'true');
 
-	    	var random_string = '';
+	    	if (this._autoplay) {
+		    	var random_string = '';
 
-	    	for (var i = this.title.length - 1; i >= 0; i--) {
-	    		random_string += this.getRandomChar();
+		    	for (var i = this.title.length - 1; i >= 0; i--) {
+		    		random_string += this.getRandomChar();
+		    	};
+
+		    	this.title = random_string;
 	    	};
-
-	    	this.title = random_string;
 	    },
 
 	    ready: function() {
-    		this.init();
+	    	if (this._autoplay) {
+    			this.init();
 
-	    	if (this.should_loop) {
-		    	setInterval(this.init, this.loop_interval);
-		    }
+		    	if (this._loop) {
+			    	setInterval(this.init, this.loop_interval);
+			    }
+	    	};
 	    },
 	}
 </script>

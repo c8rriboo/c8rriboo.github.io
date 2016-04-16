@@ -2,7 +2,15 @@
 'use strict';
 
 var Vue = require('vue');
+
+// pages
+var HomePage = require('./components/home-page.vue');
+var ProfilePage = require('./components/profile-page.vue');
+
+// elements ?
 var Menu = require('./components/menu.vue');
+
+// plugins
 var Bugify = require('./components/bugify.vue');
 
 Vue.config.debug = true;
@@ -12,11 +20,13 @@ new Vue({
 
 	components: {
 		menu: Menu,
-		bugify: Bugify
+		bugify: Bugify,
+		'home-page': HomePage,
+		'profile-page': ProfilePage
 	},
 
 	data: {
-		active_page: 'home'
+		active_page: 'home-page'
 	},
 
 	ready: function ready() {
@@ -24,12 +34,14 @@ new Vue({
 	}
 });
 
-},{"./components/bugify.vue":2,"./components/menu.vue":3,"vue":6}],2:[function(require,module,exports){
+},{"./components/bugify.vue":2,"./components/home-page.vue":3,"./components/menu.vue":4,"./components/profile-page.vue":5,"vue":8}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = {
 
-	props: ['string', 'loop'],
+	name: 'bugify',
+
+	props: ['string', 'loop', 'autoplay'],
 
 	data: function data() {
 		return {
@@ -48,6 +60,8 @@ module.exports = {
 
 	methods: {
 		init: function init() {
+			var wait = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
 			var vm = this;
 
 			setTimeout(function () {
@@ -105,39 +119,61 @@ module.exports = {
 
 	created: function created() {
 		this.title = this.string;
-		this.should_loop = this.loop === 'true';
+		this._loop = this.loop === 'true';
+		this._autoplay = this.autoplay === 'true';
 
-		var random_string = '';
+		if (this._autoplay) {
+			var random_string = '';
 
-		for (var i = this.title.length - 1; i >= 0; i--) {
-			random_string += this.getRandomChar();
+			for (var i = this.title.length - 1; i >= 0; i--) {
+				random_string += this.getRandomChar();
+			};
+
+			this.title = random_string;
 		};
-
-		this.title = random_string;
 	},
 
 	ready: function ready() {
-		this.init();
+		if (this._autoplay) {
+			this.init();
 
-		if (this.should_loop) {
-			setInterval(this.init, this.loop_interval);
-		}
+			if (this._loop) {
+				setInterval(this.init, this.loop_interval);
+			}
+		};
 	}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"bugify\">\n\t{{ title }}\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<span id=\"bugify\" @click=\"fakeDebug(0)\">\n\t{{ title }}\n</span>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "c:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\bugify.vue"
+  var id = "C:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\bugify.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":5}],3:[function(require,module,exports){
+},{"vue":8,"vue-hot-reload-api":7}],3:[function(require,module,exports){
+"use strict";
+
+module.exports = {};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"home-page\">\n\thome\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\home-page.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":8,"vue-hot-reload-api":7}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -145,19 +181,17 @@ module.exports = {
     data: function data() {
         return {
             menu: {
-                home: 'Home',
-                profile: 'Me, myself & I',
-                contact: 'Contact'
+                'home-page': 'Home',
+                'profile-page': 'Me, myself & I'
             }
 
         };
     },
 
     methods: {
-        setActivePage: function setActivePage(page_id) {
+        setActivePage: function setActivePage(event, page_id) {
             this.$parent.active_page = page_id;
         }
-
     },
 
     computed: {
@@ -171,19 +205,36 @@ module.exports = {
     ready: function ready() {}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"menu\">\n\t<ul>\n\t\t<li v-for=\"(page_id, page) in menu\" @click=\"setActivePage(page_id)\" :class=\"{active: page_id == active_page}\">\n\t\t\t<span>{{ page }}</span>\n\t\t</li>\n\t</ul>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"menu\">\n\t<ul>\n\t\t<li v-for=\"(page_id, page) in menu\" @click=\"setActivePage($event, page_id)\" :class=\"{active: page_id == active_page}\">\n\t\t\t<span>{{ page }}</span>\n\t\t</li>\n\t</ul>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "c:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\menu.vue"
+  var id = "C:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\menu.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":5}],4:[function(require,module,exports){
+},{"vue":8,"vue-hot-reload-api":7}],5:[function(require,module,exports){
+"use strict";
+
+module.exports = {};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"profile-page\">\n\tprofile\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\wamp\\www\\c8rriboo.github.io\\dev\\js\\components\\profile-page.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":8,"vue-hot-reload-api":7}],6:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -276,7 +327,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var Vue // late bind
 var map = Object.create(null)
 var shimmed = false
@@ -576,7 +627,7 @@ function format (id) {
   return id.match(/[^\/]+\.vue$/)[0]
 }
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v1.0.21
@@ -10502,6 +10553,6 @@ setTimeout(function () {
 
 module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":4}]},{},[1]);
+},{"_process":6}]},{},[1]);
 
 //# sourceMappingURL=app.js.map
