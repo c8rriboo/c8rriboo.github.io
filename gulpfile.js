@@ -1,11 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var browserify = require('gulp-browserify');
-var elixir = require('laravel-elixir');
-
-require('laravel-elixir-vueify');
-
-elixir.config.js.browserify.watchify.options.poll = true;
+var concat = require('gulp-concat');
 
 gulp.task('sass', function() {
 	return gulp.src('dev/scss/app.scss')
@@ -13,14 +8,26 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest('src/css'))
 });
 
-elixir(function(mix) {
-    mix.browserify('./dev/js/app.js', './src/js/app.js', './dev');
+gulp.task('js', function() {
+	return gulp.src('dev/js/app.js')
+		.pipe(gulp.dest('src/js'))
+});
+
+var js_files = [
+    './dev/js/assets/*',
+    './dev/js/components/*',
+    './dev/js/app.js'
+];
+
+gulp.task('js', function() {
+    gulp.src(js_files)
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('./src/js'));
 });
 
 gulp.task('watch', function() {
 	gulp.watch('dev/**/*.scss', ['sass']);
-	gulp.watch('dev/**/*.js', ['default']);
-	gulp.watch('dev/**/*.vue', ['default']);
+	gulp.watch('dev/**/*.js', ['js']);
 });
 
 

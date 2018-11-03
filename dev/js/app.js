@@ -1,32 +1,63 @@
-var Vue = require('vue');
+$(document).ready(function() {
 
-// pages
-var HomePage = require('./components/home-page.vue')
-var ProfilePage = require('./components/profile-page.vue')
+	console.log('ready');
 
-// elements ?
-var Menu = require('./components/menu.vue')
+	var container = document.getElementById('c8rriboo');
 
-// plugins
-var Bugify = require('./components/bugify.vue')
+	if (container.addEventListener) {
+		// IE9, Chrome, Safari, Opera
+		container.addEventListener("mousewheel", doScroll, false);
+		// Firefox
+		container.addEventListener("DOMMouseScroll", doScroll, false);
+	}
+	// IE 6/7/8
+	else container.attachEvent("onmousewheel", doScroll);
 
-Vue.config.debug = true;
 
-new Vue ({
-	el: '#c8rriboo',
+	function doScroll(e) {
+		// cross-browser wheel delta
+		var e = window.event || e; // old IE support
+		var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 
-    components: {
-    	menu: Menu,
-    	bugify: Bugify,
-    	'home-page': HomePage,
-    	'profile-page': ProfilePage,
-	},
+		var scroll_value = container.scrollLeft + (200 * (-delta));
 
-	data: {
-		active_page: 'home-page',
-	},
+		TweenLite.to('#c8rriboo', .5, {scrollTo:{x: scroll_value}});
 
-	ready: function() {
-		// alert('ready!');
-	},
-})
+		return false;
+	}
+
+	window.setInterval(function(){
+		updateRandomSlide();
+	}, 2000);
+
+	var prev_slide_container = 10;
+
+	function updateRandomSlide() {
+		var slide_containers = $('.slides-container').length;
+
+		var next_slide_container = Math.floor(Math.random() * slide_containers);
+
+		if (next_slide_container != prev_slide_container) {
+			nextSlide(next_slide_container);
+		} else {
+			updateRandomSlide();
+		}
+	}
+
+	function nextSlide(index) {
+		prev_slide_container = index;
+
+		var slide_container = $($('.slides-container')[index]);
+
+		var active_slide = slide_container.find('.slide.active');
+		var next_slide = active_slide.next();
+
+		if (next_slide.length < 1) {
+			next_slide = slide_container.find('.slide').eq(0);
+		}
+
+		active_slide.removeClass('active')
+		next_slide.addClass('active');
+	}
+
+});
