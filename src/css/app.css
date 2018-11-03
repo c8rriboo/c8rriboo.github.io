@@ -2,6 +2,10 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -49,7 +53,7 @@ html {
   background-color: #3a3a3a; }
 
 body {
-  font-family: calibri, arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #fafafa;
   width: 100vw;
   height: 100vh; }
@@ -72,8 +76,13 @@ body {
       font-weight: normal;
       color: rgba(250, 250, 250, 0.8);
       position: absolute;
-      top: 15%;
+      top: 10%;
       left: 17%; }
+  #c8rriboo .desc {
+    font-size: 1.5vw;
+    color: rgba(250, 250, 250, 0.8);
+    margin-top: 1vh;
+    margin-left: .5vw; }
   #c8rriboo .social {
     font-size: 2vw;
     text-align: right;
@@ -88,7 +97,7 @@ body {
     transform: translateY(-50%); }
   #c8rriboo section {
     display: inline-block;
-    width: 100%;
+    width: 200%;
     height: 100%;
     white-space: nowrap; }
     #c8rriboo section:after {
@@ -97,21 +106,21 @@ body {
   #c8rriboo .block {
     position: relative;
     display: inline-block;
-    float: left;
-    outline: 2px #ffbebd solid; }
+    float: left; }
     #c8rriboo .block.big-one {
       width: 100%;
       height: 100%;
       background-color: #3a3a3a; }
     #c8rriboo .block.medium-one {
-      width: 75%;
-      height: 100%;
+      width: 75vw;
+      height: 100vh;
       background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
-      background-size: 600% 600%;
-      -webkit-animation: gradientScroll 10s ease infinite;
-      -moz-animation: gradientScroll 10s ease infinite;
-      -o-animation: gradientScroll 10s ease infinite;
-      animation: gradientScroll 10s ease infinite; }
+      background-size: 600% 600%; }
+      #c8rriboo .block.medium-one.gradient-scroll {
+        -webkit-animation: gradientScroll 10s ease infinite;
+        -moz-animation: gradientScroll 10s ease infinite;
+        -o-animation: gradientScroll 10s ease infinite;
+        animation: gradientScroll 10s ease infinite; }
 
 @-webkit-keyframes gradientScroll {
   0% {
@@ -145,9 +154,13 @@ body {
   100% {
     background-position: 0% 50%; } }
     #c8rriboo .block.small-one {
-      width: 25%;
-      height: 50%;
+      width: 25vw;
+      height: 50vh;
       background-color: #ffbebd; }
+    #c8rriboo .block:hover .slide-info {
+      width: 80%;
+      height: 80%;
+      opacity: 1; }
   #c8rriboo .slides-container {
     position: absolute;
     top: 0;
@@ -170,6 +183,10 @@ body {
         opacity: 1; }
   #c8rriboo .slide-info {
     display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #fafafa;
+    white-space: normal;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -180,7 +197,21 @@ body {
     background-color: #ffbebd;
     opacity: 0;
     transition: opacity .5s, width .5s, height .5s; }
-    #c8rriboo .slide-info:hover {
-      width: 80%;
-      height: 80%;
-      opacity: 1; }
+    #c8rriboo .slide-info h2 {
+      font-size: 2vw;
+      margin-top: 2vh; }
+    #c8rriboo .slide-info ul {
+      position: absolute;
+      bottom: 2vh;
+      left: 1vw;
+      right: 1vw; }
+      #c8rriboo .slide-info ul li {
+        display: inline-block;
+        margin: .5vh .5vw;
+        position: relative;
+        font-size: 1.8vw;
+        text-align: center; }
+        #c8rriboo .slide-info ul li .desc {
+          opacity: 0;
+          position: absolute;
+          font-size: 1.6vw; }

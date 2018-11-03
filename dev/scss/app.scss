@@ -1,12 +1,26 @@
 @import 'reset';
 @import 'variables';
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 html{
 	background-color: $black;
 }
 
 body {
-	font-family: calibri, arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	color: $white;
 
 	width: 100vw;
@@ -38,9 +52,17 @@ body {
 		    color: rgba($white, 0.8);
 
 		    position: absolute;
-		    top: 15%;
+		    top: 10%;
 		    left: 17%;
 		}
+	}
+
+	.desc {
+		font-size: 1.5vw;
+		color: rgba($white, 0.8);
+
+    	margin-top: 1vh;
+    	margin-left: .5vw;
 	}
 
 	.social {
@@ -53,7 +75,7 @@ body {
     		color: rgba($white, 0.8);
 
     		&:hover {
-    			color: #ffbebd;
+    			color: $pink;
     		}
     	}
 	}
@@ -67,10 +89,9 @@ body {
 
 	section {
 	    display: inline-block;
-	    width: 100%;
+	    width: 200%;
 	    height: 100%;
     
-    	// overflow: auto;
     	white-space: nowrap;
 
 	    &:after {
@@ -85,8 +106,6 @@ body {
 		display: inline-block;
 		float: left;
 
-		outline: 2px #ffbebd solid;
-
 		&.big-one {
 			width: 100%;
 			height: 100%;
@@ -95,49 +114,56 @@ body {
 		}
 
 		&.medium-one {
-			width: 75%;
-			height: 100%;
-
-			// background-image: linear-gradient(to right bottom, rgba(#262f34, .5), rgba(#334365, .5), rgba(#744a86, .5), rgba(#c3437c, .5), rgba(#f55449, .5));
-			// background-image: linear-gradient(to right bottom, rgba(#0c3560, .5), rgba(#af59ba, .5), rgba(#ff9500, .5));
-			// background-position: center;
-			// background-size: cover;
+			width: 75vw;
+			height: 100vh;
 
 			background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
 			background-size: 600% 600%;
 
-			-webkit-animation: gradientScroll 10s ease infinite;
-			-moz-animation: gradientScroll 10s ease infinite;
-			-o-animation: gradientScroll 10s ease infinite;
-			animation: gradientScroll 10s ease infinite;
 
-			@-webkit-keyframes gradientScroll {
-			    0%{background-position:0% 50%}
-			    50%{background-position:100% 50%}
-			    100%{background-position:0% 50%}
-			}
-			@-moz-keyframes gradientScroll {
-			    0%{background-position:0% 50%}
-			    50%{background-position:100% 50%}
-			    100%{background-position:0% 50%}
-			}
-			@-o-keyframes gradientScroll {
-			    0%{background-position:0% 50%}
-			    50%{background-position:100% 50%}
-			    100%{background-position:0% 50%}
-			}
-			@keyframes gradientScroll { 
-			    0%{background-position:0% 50%}
-			    50%{background-position:100% 50%}
-			    100%{background-position:0% 50%}
+			&.gradient-scroll {
+				-webkit-animation: gradientScroll 10s ease infinite;
+				-moz-animation: gradientScroll 10s ease infinite;
+				-o-animation: gradientScroll 10s ease infinite;
+				animation: gradientScroll 10s ease infinite;
+
+				@-webkit-keyframes gradientScroll {
+				    0%{background-position:0% 50%}
+				    50%{background-position:100% 50%}
+				    100%{background-position:0% 50%}
+				}
+				@-moz-keyframes gradientScroll {
+				    0%{background-position:0% 50%}
+				    50%{background-position:100% 50%}
+				    100%{background-position:0% 50%}
+				}
+				@-o-keyframes gradientScroll {
+				    0%{background-position:0% 50%}
+				    50%{background-position:100% 50%}
+				    100%{background-position:0% 50%}
+				}
+				@keyframes gradientScroll { 
+				    0%{background-position:0% 50%}
+				    50%{background-position:100% 50%}
+				    100%{background-position:0% 50%}
+				}
 			}
 		}
 
 		&.small-one {
-			width: 25%;
-			height: 50%;
+			width: 25vw;
+			height: 50vh;
 
-			background-color: #ffbebd;
+			background-color: $pink;
+		}
+
+		&:hover {
+			.slide-info {
+				width: 80%;
+				height: 80%;
+
+				opacity: 1;
+			}
 		}
 	}
 
@@ -176,6 +202,11 @@ body {
 	.slide-info {
 		display: block;
 
+		text-align: center;
+		text-decoration: none;
+		color: $white;
+		white-space: normal;
+
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -186,16 +217,40 @@ body {
 
 		transform: translateY(-50%) translateX(-50%);
 
-		background-color: #ffbebd;
+		background-color: $pink;
 		opacity: 0;
 
 		transition: opacity .5s, width .5s, height .5s;
 
-		&:hover {
-			width: 80%;
-			height: 80%;
+		h2 {
+		    font-size: 2vw;
 
-			opacity: 1;
+		    margin-top: 2vh;
+		}
+
+		ul {
+			position: absolute;
+			bottom: 2vh;
+		    left: 1vw;
+    		right: 1vw;
+
+			li {
+				display: inline-block;
+				margin: .5vh .5vw;
+
+				position: relative;
+
+				font-size: 1.8vw;
+				text-align: center;
+
+				.desc {
+					opacity: 0;
+
+					position: absolute;
+
+					font-size: 1.6vw;
+				}
+			}
 		}
 	}
 }
