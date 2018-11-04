@@ -1,11 +1,22 @@
 $(document).ready(function() {
 
-	console.log('ready');
-
 	resetGRadientScroll();
+	realAge();
 
 	function resetGRadientScroll() {
 		$('.gradient-scroll').removeClass('gradient-scroll').addClass('gradient-scroll');
+	}
+
+	function realAge() {
+		var now = new Date();
+
+		var birth = new Date('1993-09-07T22:00:00');
+
+		var diff = now - birth;
+
+		var age = Math.floor((diff) / (1000*60*60*24*365));
+
+		$('.age').html(age);
 	}
 
 	var container = document.getElementById('c8rriboo');

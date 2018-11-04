@@ -35,8 +35,11 @@ body {
 	overflow-y: hidden;
     white-space: nowrap;
 
-    #header {
+    .header {
+		position: absolute;
+		top: 50%;
     	left: 50%;
+
 		transform: translateY(-50%) translateX(-50%);
     }
 
@@ -80,13 +83,6 @@ body {
     	}
 	}
 
-	.v-center {
-		position: absolute;
-		top: 50%;
-
-		transform: translateY(-50%);
-	}
-
 	section {
 	    display: inline-block;
 	    width: 200%;
@@ -117,8 +113,9 @@ body {
 			width: 75vw;
 			height: 100vh;
 
-			background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
-			background-size: 600% 600%;
+			// background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
+			// background: linear-gradient(131deg, #0077ee, #fee140, #fa709a);
+			background-size: 600% 100%;
 
 
 			&.gradient-scroll {
@@ -252,5 +249,102 @@ body {
 				}
 			}
 		}
+	}
+}
+
+#moon {
+	width: 15vw;
+	height: 15vw;
+
+	background-color: #c8bbb3;
+	// background-color: $black;
+	background-color: darken($white, 10%);
+	border-radius: 50%;
+
+	position: absolute;
+	top: 7vw;
+	left: 7vw;
+
+	overflow: hidden;
+
+	box-shadow: 0 0 7px $white;
+
+	transform: scale(.7);
+
+	opacity: .5;
+
+	.visible {
+		width: 15vw;
+		height: 15vw;
+
+		background-color: #f4e8dc;
+		// background-color: lighten($black, 5%);
+		background-color: $white;
+		border-radius: 50%;
+
+		position: absolute;
+		top: -2vw;
+	    left: 3vw;
+	}
+
+	.crats {
+		width: 3vw;
+		height: 3vw;
+
+		background-color: #c8bbb3;
+		// background-color: $black;
+		background-color: darken($white, 10%);
+		border: 3px solid #f4e8dc;
+		// border: 3px solid lighten($black, 5%);
+		border: 3px solid $white;
+		border-radius: 50%;
+
+		position: absolute;
+		top: 3vw;
+	    left: 2vw;
+
+	    &.crat-2 {
+			width: 1.5vw;
+			height: 1.5vw;
+
+			position: absolute;
+			top: 11vw;
+		    left: 6vw;
+	    }
+
+	    &.crat-3 {
+			width: 2.5vw;
+			height: 2.5vw;
+
+			position: absolute;
+			top: 6vw;
+		    left: 9vw;
+	    }
+	}
+
+	// -webkit-animation: moonFade 15s ease infinite;
+	// -moz-animation: moonFade 15s ease infinite;
+	// -o-animation: moonFade 15s ease infinite;
+	// animation: moonFade 15s ease infinite;
+
+	@-webkit-keyframes moonFade {
+	    0%{opacity: 0}
+	    50%{opacity: .5}
+	    100%{opacity: 0}
+	}
+	@-moz-keyframes moonFade {
+	    0%{opacity: 0}
+	    50%{opacity: .5}
+	    100%{opacity: 0}
+	}
+	@-o-keyframes moonFade {
+	    0%{opacity: 0}
+	    50%{opacity: .5}
+	    100%{opacity: 0}
+	}
+	@keyframes moonFade { 
+	    0%{opacity: 0}
+	    50%{opacity: .5}
+	    100%{opacity: 0}
 	}
 }
