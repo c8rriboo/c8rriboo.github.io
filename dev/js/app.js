@@ -3,6 +3,9 @@ $(document).ready(function() {
 	resetGRadientScroll();
 	realAge();
 
+	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+	console.log(isMobile);
+
 	function resetGRadientScroll() {
 		$('.gradient-scroll').removeClass('gradient-scroll').addClass('gradient-scroll');
 	}
@@ -21,14 +24,16 @@ $(document).ready(function() {
 
 	var container = document.getElementById('c8rriboo');
 
-	if (container.addEventListener) {
-		// IE9, Chrome, Safari, Opera
-		container.addEventListener("mousewheel", doScroll, false);
-		// Firefox
-		container.addEventListener("DOMMouseScroll", doScroll, false);
+	if (!isMobile) {
+		if (container.addEventListener) {
+			// IE9, Chrome, Safari, Opera
+			container.addEventListener("mousewheel", doScroll, false);
+			// Firefox
+			container.addEventListener("DOMMouseScroll", doScroll, false);		
+		}
+		// IE 6/7/8
+		else container.attachEvent("onmousewheel", doScroll);
 	}
-	// IE 6/7/8
-	else container.attachEvent("onmousewheel", doScroll);
 
 
 	function doScroll(e) {
