@@ -1,13 +1,28 @@
 $(document).ready(function() {
 
-	resetGRadientScroll();
 	realAge();
 
-	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-	console.log(isMobile);
+	launchIntro();
 
-	function resetGRadientScroll() {
-		$('.gradient-scroll').removeClass('gradient-scroll').addClass('gradient-scroll');
+	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+	function launchIntro() {
+		var blocks = $('.block');
+		var lines = blocks.length / 4;
+
+		var tl = new TimelineMax();
+
+		for (var i = 1; i <= 4; i++) {
+			for (var j = 0; j < 3; j++) {
+				var index = i + j * 4;
+
+				var label = 'label'+i;
+
+				tl.to('.block:nth-child('+index+')', .5, {alpha: 1, ease: Power2.easeIn}, i * .1);
+			}
+		}
+
+		tl.play();
 	}
 
 	function realAge() {
@@ -22,36 +37,6 @@ $(document).ready(function() {
 		$('.age').html(age);
 	}
 
-	var container = document.getElementById('c8rriboo');
-
-	if (!isMobile) {
-		if (container.addEventListener) {
-			// IE9, Chrome, Safari, Opera
-			container.addEventListener("mousewheel", doScroll, false);
-			// Firefox
-			container.addEventListener("DOMMouseScroll", doScroll, false);		
-		}
-		// IE 6/7/8
-		else container.attachEvent("onmousewheel", doScroll);
-	}
-
-
-	function doScroll(e) {
-		// cross-browser wheel delta
-		var e = window.event || e; // old IE support
-		var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-
-		var scroll_value = container.scrollLeft + (200 * (-delta));
-
-		if (scroll_value < 0) {
-			scroll_value = 0;
-		}
-
-		TweenMax.to('#c8rriboo', .15, {scrollTo: {x: scroll_value}, onComplete: isPastTheEnd, onCompleteParams: [scroll_value]});
-
-		return false;
-	}
-
 	function isPastTheEnd(scroll_value) {
 		var first_section = $('section').first(),
 			width = first_section.outerWidth();
@@ -59,7 +44,7 @@ $(document).ready(function() {
 		if (scroll_value > width) {
 			scroll_value = scroll_value - width;
 
-			TweenLite.to('#c8rriboo', -1, {scrollTo:{x: scroll_value}});
+			TweenMax.to('#c8rriboo', -1, {scrollTo:{x: scroll_value}});
 		}
 	}
 

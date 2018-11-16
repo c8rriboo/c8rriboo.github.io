@@ -54,16 +54,15 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: #fafafa;
-  width: 100vw;
-  height: 100vh; }
+  color: #fafafa; }
+
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both; }
 
 #c8rriboo {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  white-space: nowrap; }
+  width: 100%; }
   #c8rriboo .header {
     position: absolute;
     top: 50%;
@@ -88,29 +87,30 @@ body {
   #c8rriboo .social {
     font-size: 2vw;
     text-align: right;
-    margin-top: 2vh; }
+    margin-top: 2vh;
+    opacity: 0;
+    transition: opacity .5s; }
     #c8rriboo .social a {
       color: rgba(250, 250, 250, 0.8); }
       #c8rriboo .social a:hover {
         color: #ffbebd; }
   #c8rriboo section {
-    display: inline-block;
-    width: 200%;
-    height: 100%;
-    white-space: nowrap; }
-    #c8rriboo section:after {
-      display: table;
-      clear: both; }
+    width: 100%; }
   #c8rriboo .block {
     position: relative;
-    display: inline-block;
-    float: left; }
+    float: left;
+    overflow: hidden;
+    opacity: 0; }
+    #c8rriboo .block:first-child {
+      opacity: 1 !important; }
+    #c8rriboo .block:last-child {
+      opacity: 1 !important; }
     #c8rriboo .block.big-one {
       width: 100%;
       height: 100%;
       background-color: #3a3a3a; }
     #c8rriboo .block.medium-one {
-      width: 75vw;
+      width: 75%;
       height: 100vh;
       background-size: 600% 100%; }
       #c8rriboo .block.medium-one.gradient-scroll {
@@ -151,9 +151,11 @@ body {
   100% {
     background-position: 0% 50%; } }
     #c8rriboo .block.small-one {
-      width: 25vw;
+      width: 25%;
       height: 50vh;
-      background-color: #ffbebd; }
+      background-color: #3a3a3a; }
+    #c8rriboo .block:hover .social {
+      opacity: 1; }
     #c8rriboo .block:hover .slide-info {
       width: 80%;
       height: 80%;

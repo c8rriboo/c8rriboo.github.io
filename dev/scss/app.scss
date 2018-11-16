@@ -23,17 +23,25 @@ body {
 	font-family: 'Roboto', sans-serif;
 	color: $white;
 
-	width: 100vw;
-    height: 100vh;
+	// width: 100vw;
+ //    height: 100vh;
+}
+
+.clearfix {
+    &:after {
+    	content: '';
+    	display: table;
+    	clear: both;
+    }
 }
 
 #c8rriboo {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    // height: 100vh;
 	
-	overflow-x: hidden;
-	overflow-y: hidden;
-    white-space: nowrap;
+	// overflow-x: hidden;
+	// overflow-y: hidden;
+    // white-space: nowrap;
 
     .header {
 		position: absolute;
@@ -74,6 +82,10 @@ body {
 
     	margin-top: 2vh;
 
+    	opacity: 0;
+
+    	transition: opacity .5s;
+
     	a {
     		color: rgba($white, 0.8);
 
@@ -84,23 +96,29 @@ body {
 	}
 
 	section {
-	    display: inline-block;
-	    width: 200%;
-	    height: 100%;
+	    // display: inline-block;
+	    width: 100%;
+	    // height: 100%;
     
-    	white-space: nowrap;
-
-	    &:after {
-	    	display: table;
-	    	clear: both;
-	    }
+    	// white-space: nowrap;
 	}
 
 	.block {
 	    position: relative;
 
-		display: inline-block;
 		float: left;
+
+		overflow: hidden;
+
+		opacity: 0;
+
+		&:first-child {
+			opacity: 1 !important;
+		}
+
+		&:last-child {
+			opacity: 1 !important;
+		}
 
 		&.big-one {
 			width: 100%;
@@ -110,7 +128,7 @@ body {
 		}
 
 		&.medium-one {
-			width: 75vw;
+			width: 75%;
 			height: 100vh;
 
 			// background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
@@ -148,13 +166,17 @@ body {
 		}
 
 		&.small-one {
-			width: 25vw;
+			width: 25%;
 			height: 50vh;
 
-			background-color: $pink;
+			background-color: $black;
 		}
 
 		&:hover {
+			.social {
+				opacity: 1;
+			}
+
 			.slide-info {
 				width: 80%;
 				height: 80%;
