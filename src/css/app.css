@@ -2,10 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-@import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
-@import url("https://fonts.googleapis.com/css?family=Ubuntu");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -196,6 +193,8 @@ body {
     background-color: #ffbebd;
     opacity: 0;
     transition: opacity .5s, width .5s, height .5s; }
+    #c8rriboo .slide-info.slide-info-mobile {
+      display: none; }
     #c8rriboo .slide-info h2 {
       font-size: 2vw;
       margin-top: 2vh; }
@@ -293,40 +292,52 @@ body {
   100% {
     opacity: 0; } }
 
-@media screen and (max-width: 769px) {
-  #c8rriboo {
-    overflow: scroll; }
-    #c8rriboo section {
-      width: 100%; }
-      #c8rriboo section:last-child {
-        display: none; }
-    #c8rriboo .block.medium-one {
-      width: 100vw;
-      height: 75vh; }
-    #c8rriboo .block.small-one {
-      width: 100vw;
-      height: 75vh; }
-      #c8rriboo .block.small-one .slide-info {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        height: 25vh;
-        opacity: 1; }
-        #c8rriboo .block.small-one .slide-info:hover {
-          width: 100vw;
-          height: 25vh; }
-        #c8rriboo .block.small-one .slide-info h2 {
-          margin: 0;
-          font-size: 10vw;
-          padding: 1vh 0 0; }
-        #c8rriboo .block.small-one .slide-info ul {
-          bottom: 1vh; }
-          #c8rriboo .block.small-one .slide-info ul li {
-            font-size: 7vw; }
-      #c8rriboo .block.small-one .slides-container {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        height: 50vh; } }
+@media screen and (max-width: 780px) {
+  #c8rriboo h1 {
+    font-size: 20vw; }
+    #c8rriboo h1 small {
+      font-size: 9vw;
+      top: -25%;
+      left: 17%; }
+  #c8rriboo .desc {
+    font-size: 6vw;
+    margin-top: 4vh;
+    margin-left: 2vw; }
+  #c8rriboo .social {
+    font-size: 4vw; }
+  #c8rriboo .block.small-one {
+    width: calc(100% - 8vw);
+    height: auto;
+    padding: 0 4vw 4vw 4vw; }
+    #c8rriboo .block.small-one:first-child {
+      height: 50vh; }
+    #c8rriboo .block.small-one:last-child {
+      height: 25vh; }
+    #c8rriboo .block.small-one .slide-info {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      height: auto;
+      opacity: 1; }
+      #c8rriboo .block.small-one .slide-info.slide-info-mobile {
+        display: block; }
+      #c8rriboo .block.small-one .slide-info h2 {
+        margin: 0;
+        font-size: 10vw;
+        padding: 2vh 0; }
+      #c8rriboo .block.small-one .slide-info ul {
+        position: static;
+        padding: 0 0 2vh; }
+        #c8rriboo .block.small-one .slide-info ul br {
+          display: none; }
+        #c8rriboo .block.small-one .slide-info ul li {
+          font-size: 7vw; }
+    #c8rriboo .block.small-one .slides-container {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      height: 50vh; }
+  #c8rriboo .block:hover .slide-info {
+    width: 100%; } }
