@@ -35,13 +35,13 @@ body {
 		font-size: 6vw;
 		line-height: 4vw;
 
-		color: rgba($white, .8);
+		color: rgba($white, 1.8);
 
 		small {
 			font-size: 2.5vw;
 		    font-weight: normal;
-		    color: rgba($white, 0.8);
-
+		    color: rgba($white, 1.8);
+		
 		    position: absolute;
 		    top: 10%;
 		    left: 17%;
@@ -62,15 +62,17 @@ body {
 
     	margin-top: 2vh;
 
-    	opacity: 0;
+    	// opacity: 0;
 
     	transition: opacity .5s;
 
     	a {
     		color: rgba($white, 0.8);
 
+	    	transition: color .5s;
+
     		&:hover {
-    			color: $pink;
+    			color: $back-color;
     		}
     	}
 	}
@@ -199,7 +201,7 @@ body {
 
 		text-align: center;
 		text-decoration: none;
-		color: $white;
+		color: $text-color;
 		white-space: normal;
 
 		position: absolute;
@@ -212,7 +214,7 @@ body {
 
 		transform: translateY(-50%) translateX(-50%);
 
-		background-color: $pink;
+		background-color: rgba($back-color, 1.8);
 		opacity: 0;
 
 		transition: opacity .5s, width .5s, height .5s;
@@ -221,17 +223,38 @@ body {
 			display: none;
 		}
 
+		.v-center {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			width: 100%;
+
+			transform: translateY(-50%) translateX(-50%);
+		}
+
 		h2 {
 		    font-size: 2vw;
 
 		    margin-top: 2vh;
+		    
+		    margin: 0 0 2vh;
+		}
+
+		hr {
+		    border: 1px solid $text-color;
+
+		    width: 80%;
+
+		    // opacity: 0;
+
+		    margin: 0 auto;
+
+		    transition: width .5s;
 		}
 
 		ul {
-			position: absolute;
-			bottom: 2vh;
-		    left: 1vw;
-    		right: 1vw;
+		    margin: 2vh 0 0;
 
 			li {
 				display: inline-block;
@@ -264,14 +287,14 @@ body {
 	border-radius: 50%;
 
 	position: absolute;
-	top: 7vw;
-	left: 7vw;
+	top: 50%;
+	left: 50%;
 
 	overflow: hidden;
 
 	box-shadow: 0 0 7px $white;
 
-	transform: scale(.7);
+	transform: translateX(-50%) translateY(-50%);
 
 	opacity: .5;
 
@@ -358,7 +381,7 @@ body {
 
 			small {
 			    font-size: 9vw;
-			    top: -25%;
+			    top: -15%;
 			    left: 17%;
 			}
 		}
@@ -370,7 +393,7 @@ body {
 		}
 
 		.social {
-			font-size: 4vw;
+			font-size: 7vw;
 		}
 
 		.block {
@@ -399,8 +422,25 @@ body {
 
 					opacity: 1;
 
+					background-color: $back-color;
+			
+					// color: $back-color;
+					// background-color: $text-color;
+
 					&.slide-info-mobile {
 						display: block;
+
+						h2 {
+							transform: rotateZ(45deg);
+						}
+					}
+
+					.v-center {
+						position: static;
+
+						width: 100%;
+						
+						transform: none;	
 					}
 
 					h2 {
@@ -411,10 +451,16 @@ body {
 						padding: 2vh 0;
 					}
 
+					hr {
+						display: none;
+					}
+
 					ul {
 						position: static;
 
 						padding: 0 0 2vh;
+
+						margin: 0;
 
 						br {
 							display: none;
