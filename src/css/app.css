@@ -206,10 +206,11 @@ body {
       margin-top: 2vh;
       margin: 0 0 2vh; }
     #c8rriboo .slide-info hr {
-      border: 1px solid #fafafa;
       width: 80%;
+      height: 1px;
       margin: 0 auto;
-      transition: width .5s; }
+      border: none;
+      background-color: #fafafa; }
     #c8rriboo .slide-info ul {
       margin: 2vh 0 0; }
       #c8rriboo .slide-info ul li {
