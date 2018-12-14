@@ -41,7 +41,7 @@ body {
 			font-size: 2.5vw;
 		    font-weight: normal;
 		    color: rgba($white, .8);
-		
+
 		    position: absolute;
 		    top: 10%;
 		    left: 17%;
@@ -57,17 +57,20 @@ body {
 	}
 
 	.social {
-	    font-size: 2vw;
-    	text-align: right;
+	    font-size: 1.5vw;
+    	text-align: left;
 
     	margin-top: 2vh;
-
-    	// opacity: 0;
 
     	transition: opacity .5s;
 
     	a {
+    	    display: block;
+
+    	    margin: 0 .5vw .5vw;
+
     		color: rgba($white, 0.8);
+   			text-decoration: none;
 
 	    	transition: color .5s;
 
@@ -108,39 +111,6 @@ body {
 		&.medium-one {
 			width: 75%;
 			height: 100vh;
-
-			// background: linear-gradient(131deg, #0077ee, #cf64ba, #ff9502);
-			// background: linear-gradient(131deg, #0077ee, #fee140, #fa709a);
-			background-size: 600% 100%;
-
-
-			&.gradient-scroll {
-				-webkit-animation: gradientScroll 10s ease infinite;
-				-moz-animation: gradientScroll 10s ease infinite;
-				-o-animation: gradientScroll 10s ease infinite;
-				animation: gradientScroll 10s ease infinite;
-
-				@-webkit-keyframes gradientScroll {
-				    0%{background-position:0% 50%}
-				    50%{background-position:100% 50%}
-				    100%{background-position:0% 50%}
-				}
-				@-moz-keyframes gradientScroll {
-				    0%{background-position:0% 50%}
-				    50%{background-position:100% 50%}
-				    100%{background-position:0% 50%}
-				}
-				@-o-keyframes gradientScroll {
-				    0%{background-position:0% 50%}
-				    50%{background-position:100% 50%}
-				    100%{background-position:0% 50%}
-				}
-				@keyframes gradientScroll { 
-				    0%{background-position:0% 50%}
-				    50%{background-position:100% 50%}
-				    100%{background-position:0% 50%}
-				}
-			}
 		}
 
 		&.small-one {
@@ -160,6 +130,9 @@ body {
 				height: 80%;
 
 				opacity: 1;
+
+				top: 10%;
+				left: 10%;
 			}
 		}
 	}
@@ -205,19 +178,19 @@ body {
 		white-space: normal;
 
 		position: absolute;
-		top: 50%;
-		left: 50%;
+		top: 0;
+		left: 0;
 		z-index: 10;
 
 		width: 100%;
 		height: 100%;
 
-		transform: translateY(-50%) translateX(-50%);
+		// transform: translateY(-50%) translateX(-50%);
 
 		background-color: rgba($back-color, 1.8);
 		opacity: 0;
 
-		transition: opacity .5s, width .5s, height .5s;
+		transition: opacity .5s, width .5s, height .5s, top .5s, left .5s;
 
 		&.slide-info-mobile {
 			display: none;
@@ -237,7 +210,7 @@ body {
 		    font-size: 2vw;
 
 		    margin-top: 2vh;
-		    
+
 		    margin: 0 0 2vh;
 		}
 
@@ -247,8 +220,8 @@ body {
 
 		    margin: 0 auto;
 		    border: none;
-		    
-		    background-color: #fafafa;
+
+		    background-color: $white;
 		}
 
 		ul {
@@ -279,8 +252,6 @@ body {
 	width: 15vw;
 	height: 15vw;
 
-	background-color: #c8bbb3;
-	// background-color: $black;
 	background-color: darken($white, 10%);
 	border-radius: 50%;
 
@@ -300,8 +271,6 @@ body {
 		width: 15vw;
 		height: 15vw;
 
-		background-color: #f4e8dc;
-		// background-color: lighten($black, 5%);
 		background-color: $white;
 		border-radius: 50%;
 
@@ -314,11 +283,7 @@ body {
 		width: 3vw;
 		height: 3vw;
 
-		background-color: #c8bbb3;
-		// background-color: $black;
 		background-color: darken($white, 10%);
-		border: 3px solid #f4e8dc;
-		// border: 3px solid lighten($black, 5%);
 		border: 3px solid $white;
 		border-radius: 50%;
 
@@ -344,148 +309,6 @@ body {
 		    left: 9vw;
 	    }
 	}
-
-	// -webkit-animation: moonFade 15s ease infinite;
-	// -moz-animation: moonFade 15s ease infinite;
-	// -o-animation: moonFade 15s ease infinite;
-	// animation: moonFade 15s ease infinite;
-
-	@-webkit-keyframes moonFade {
-	    0%{opacity: 0}
-	    50%{opacity: .5}
-	    100%{opacity: 0}
-	}
-	@-moz-keyframes moonFade {
-	    0%{opacity: 0}
-	    50%{opacity: .5}
-	    100%{opacity: 0}
-	}
-	@-o-keyframes moonFade {
-	    0%{opacity: 0}
-	    50%{opacity: .5}
-	    100%{opacity: 0}
-	}
-	@keyframes moonFade { 
-	    0%{opacity: 0}
-	    50%{opacity: .5}
-	    100%{opacity: 0}
-	}
 }
 
-@media screen and (max-width: 780px) {
-	#c8rriboo {
-		h1 {
-			font-size: 20vw;
-
-			small {
-			    font-size: 9vw;
-			    top: -15%;
-			    left: 17%;
-			}
-		}
-
-		.desc{
-		    font-size: 6vw;
-		    margin-top: 4vh;
-		    margin-left: 2vw;
-		}
-
-		.social {
-			font-size: 7vw;
-		}
-
-		.block {
-			&.small-one {
-				width: calc(100% - 8vw);
-				height: auto;
-
-				padding: 0 4vw 4vw 4vw;
-
-				&:first-child {
-					height: 50vh;
-				}
-
-				&:last-child {
-					height: 25vh;
-				}
-
-				.slide-info {
-					position: relative; 
-					top: auto;
-					left: auto;
-
-					transform: none;
-
-					height: auto;
-
-					opacity: 1;
-
-					background-color: $back-color;
-			
-					// color: $back-color;
-					// background-color: $text-color;
-
-					&.slide-info-mobile {
-						display: block;
-
-						h2 {
-							transform: rotateZ(45deg);
-						}
-					}
-
-					.v-center {
-						position: static;
-
-						width: 100%;
-						
-						transform: none;	
-					}
-
-					h2 {
-						margin: 0;
-
-						font-size: 10vw;
-
-						padding: 2vh 0;
-					}
-
-					hr {
-						display: none;
-					}
-
-					ul {
-						position: static;
-
-						padding: 0 0 2vh;
-
-						margin: 0;
-
-						br {
-							display: none;
-						}
-
-						li {
-							font-size: 7vw;
-						}
-					}
-				}
-
-				.slides-container {
-					position: relative; 
-					top: auto;
-					left: auto;
-
-					transform: none;
-
-					height: 50vh;
-				} 
-			}
-
-			&:hover {
-				.slide-info {
-					width: 100%;
-				}
-			}
-		}
-	}
-}
+@import 'mobile';
